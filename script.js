@@ -8,9 +8,9 @@ var confirmLowercase;
 var generateBtn = document.querySelector("#generate");
 var lower = ["a",'b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
 var capital = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
-var numbers = [0,1,2,3,4,5,6,7,8,9]
+var numbers = [0,1,2,3,4,5,6,7,8,9] 
 var character = ["!", "#", "$", "%", "&", "'", "(", ")", "*", "+", ",", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "/", "]", "^", "_", "`", "{", "|", "}", "~"];
-
+//arrays for different criteria
 
 // var randomLower = Math.floor(Math.random() * lower.length);
 // var randomUpper = Math.floor(Math.random() * capital.length);
@@ -30,10 +30,10 @@ function generatePassword() {
     length = parseInt(prompt("How many characters would you like your password? Choose between 8 and 128"));
   
     if (!length) {
-        alert("You need to input a number in order to continue");
+        alert("You need to input a number in order to continue"); //rejects input if nothing is inputted
         return;
     } else if (length < 8 || length > 128) {
-      
+      //rejects input if number isn't between 8 and 128
     alert("You must choose between 8 and 128");
        
     return;
@@ -44,7 +44,6 @@ function generatePassword() {
         confirmUppercase = confirm("Do you want your password to have Uppercase letters?");
         confirmLowercase = confirm("Do you want your password to have Lowercase letters?");
     };
- console.log(confirmCharacter)
     // Else if for 4 negative options
     if (!confirmCharacter && !confirmNumber && !confirmUppercase && !confirmLowercase) {
        
@@ -53,75 +52,74 @@ function generatePassword() {
     } else if (confirmCharacter && confirmNumber && confirmUppercase && confirmLowercase) {
 
       randomPass = randomPass.concat(lower,capital,numbers,character);
-    
+      //adds all selected arrays to a new array
     } else if (confirmNumber && confirmUppercase && confirmLowercase) {
 
-      randomPass.push(numberChoice,upperChoice,lowerChoice);
+      randomPass = randomPass.concat(lower,capital,numbers);
 
     } else if (confirmCharacter && confirmUppercase && confirmLowercase) {
 
-      randomPass.push(lowerChoice,upperChoice,charChoice);
+      randomPass = randomPass.concat(lower,capital,character);
     } else if (confirmCharacter && confirmNumber && confirmLowercase) {
 
-      randomPass.push(lowerChoice,numberChoice,charChoice);
+      randomPass = randomPass.concat(lower,numbers,character);
     
     } else if (confirmCharacter && confirmNumber && confirmUppercase) {
 
-      randomPass.push(upperChoice,numberChoice,charChoice);
+      randomPass = randomPass.concat(capital,numbers,character);
     
     } else if (confirmCharacter && confirmNumber) {
 
-      randomPass.push(numberChoice,charChoice);
+      randomPass = randomPass.concat(numbers,character);
 
     } else if (confirmCharacter && confirmUppercase) {
 
-      randomPass.push(upperChoice,charChoice);
+      randomPass = randomPass.concat(capital,character);
     
     } else if (confirmCharacter && confirmLowercase) {
 
-      randomPass.push(lowerChoice,charChoice);
+      randomPass = randomPass.concat(lower,character);
     
     } else if (confirmNumber && confirmUppercase) {
 
-      randomPass.push(upperChoice,numberChoice);
+      randomPass = randomPass.concat(capital,numbers);
     
     } else if (confirmNumber &&confirmLowercase) {
 
-      randomPass.push(lowerChoice,numberChoice);
+      randomPass = randomPass.concat(lower,numbers);
     
     } else if (confirmUppercase && confirmLowercase) {
 
-      randomPass.push(lowerChoice,upperChoice);
+      randomPass = randomPass.concat(lower,capital);
     } else if (confirmCharacter) {
 
-      randomPass.push(charChoice);
+      randomPass = randomPass.concat(character);
     } else if (confirmNumber) {
 
-      randomPass.push(numberChoice);
+      randomPass = randomPass.concat(numbers);
     
     }else if (confirmUppercase) {
 
-      randomPass.push(upperChoice);
+      randomPass = randomPass.concat(capital);
     
     } else if (confirmLowercase) {
 
-      randomPass.push(lowerChoice);
+      randomPass = randomPass.concat(lower);
     
     }
-   
+   //above is the code used to select the different criterea for the password 
     console.log(randomPass);
     var password = [];
     for(i = 0;i<length;i++){
-
+//generates password based on inputed length and criterea
       var randomChoice= Math.floor(Math.random() * randomPass.length);
       password.push(randomPass[randomChoice]);
-
     }
   
      password = password.toString();
      password = password.replaceAll(',','');  
-
-   return password;  
+//turns password from an array to a string and removes the commas
+   return password;  //returns password to function
 }
 // Write password to the #password input
 function writePassword() {
@@ -130,7 +128,7 @@ function writePassword() {
 
   var passwordText = document.querySelector("#password");
 
-  // finalPassword = finalPassword.replaceAll(',','');
+  // displays password on screen
   passwordText.textContent = finalPassword;
 
 }
